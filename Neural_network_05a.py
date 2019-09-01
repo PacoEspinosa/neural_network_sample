@@ -6,7 +6,6 @@ Created on Tue Aug 27 19:05:57 2019
 """
 
 # first neural network with keras tutorial
-from numpy import loadtxt
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense
