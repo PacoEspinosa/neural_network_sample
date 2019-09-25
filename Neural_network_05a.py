@@ -6,7 +6,6 @@ Created on Tue Aug 27 19:05:57 2019
 """
 
 # first neural network with keras tutorial
-from numpy import loadtxt
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense
@@ -14,6 +13,12 @@ from keras.layers import Dense
 # load the dataset
 #dataset = loadtxt('pima-indians-diabetes.csv', delimiter=',')
 # split into input (X) and output (y) variables
+
+y = np.array([
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
+            ]).T
+
+# define the keras model
 X = np.array(
         [
         [703,849,8.3158,0.0088,7.5048,11,1,28,1.3228,0.3929,0.5197,2,5],
@@ -123,11 +128,6 @@ X = np.array(
         [813,952,7.5909,0.0081,7.2278,12,1,28,1.5808,0.4286,0.6775,2,4]
         ]
         )
-y = np.array([
-	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
-            ]).T
-
-# define the keras model
 model = Sequential()
 model.add(Dense(12, input_dim=13, activation='relu'))
 model.add(Dense(13, activation='relu'))
