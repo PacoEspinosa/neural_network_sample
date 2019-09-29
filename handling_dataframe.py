@@ -124,7 +124,8 @@ X_corr = X_df.corr()
 X_corr_mark = X_corr[X_corr >0.5]
 type(X_corr_mark)
 X_corr_mark.iloc[10,:]
-X_ind = X_df[[0,2,]]
+X_ind = X_df[[0,2,4,8,12]]
+X_corr = X_ind.corr()
 
 # Generate a mask for the upper triangle
 mask = np.zeros_like(X_corr, dtype=np.bool)
@@ -136,3 +137,15 @@ cmap = sns.diverging_palette(220, 10, as_cmap=True)
 # Draw the heatmap with the mask and correct aspect ratio
 sns.heatmap(X_corr, mask=mask, cmap=cmap, vmax=.3, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5}, annot= True)
+
+ax = sns.heatmap(
+    X_corr, 
+    vmin=-1, vmax=1, center=0,
+    cmap=sns.diverging_palette(20, 220, n=200),
+    square=True
+)
+ax.set_xticklabels(
+    ax.get_xticklabels(),
+    rotation=45,
+    horizontalalignment='right'
+);

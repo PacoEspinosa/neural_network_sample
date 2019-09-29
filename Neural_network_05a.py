@@ -128,9 +128,10 @@ X = np.array(
         [813,952,7.5909,0.0081,7.2278,12,1,28,1.5808,0.4286,0.6775,2,4]
         ]
         )
+X = X[:,[0,2,4,8,12]]
 model = Sequential()
-model.add(Dense(12, input_dim=13, activation='relu'))
-model.add(Dense(13, activation='relu'))
+model.add(Dense(4, input_dim=5, activation='relu'))
+model.add(Dense(5, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
 # compile the keras model
@@ -144,7 +145,7 @@ _, accuracy = model.evaluate(X, y)
 print('Accuracy: %.2f' % (accuracy*100))
 
 Xp = np.array([
-	[813,952,7.5909,0.0081,7.2278,13,1,28,1.7126,0.4643,0.7952,2,3]
+	[813,7.5909,7.2278,1.7126,3]
     ])
 # make class predictions with the model
 predictions = model.predict_classes(Xp)
