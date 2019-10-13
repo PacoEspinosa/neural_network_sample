@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Oct  7 23:04:27 2019
+Created on Sat Oct 12 20:41:28 2019
 
-@author: Francisco Espinosa
+@author: fespinosa
 """
+
 import pymysql
 import pandas as pd
 import numpy as np
@@ -35,18 +36,27 @@ tipo_juego = 'melate'
 >inercia_prom - 8
 >position - 12
 '''
+for i in range(3):
+    if i==0:    
+        data_source = "select valor, MinConcurso, media, desviacion, Latencia, position"
+    else:
+        data_source = "select MinConcurso, media, desviacion, Latencia, position"
 
-data_source = "select valor, MinConcurso, media, desviacion, Latencia, position"
-data_source += " from Indice_centralidad where Tipo_juego = '" + tipo_juego + "' and Concurso = " + str(prediccion) + ';'
-
-# execute SQL query using execute() method.
-#cursor.execute(data_source)
-
-# Fetch whole dataset method.
-X_df = pd.read_sql(data_source, db)
+    data_source += " from Indice_centralidad where Tipo_juego = '" + tipo_juego + "' and Concurso = " + str(prediccion) + ';'
+    if i==0:
+        X_df01 = pd.read_sql(data_source, db)
+    elif i == 1:
+        X_df02 = pd.read_sql(data_source, db)
+    elif i == 2:
+        X_df03 = pd.read_sql(data_source, db)
+    
+    prediccion -= ((i+1)**3-1)
+#    print(prediccion,((i+1)**3-1),i)
+    
+result = pd.concat([X_df01, X_df02, X_df03], axis=1, sort=True)
 
 #X_df = pd.DataFrame(df)
-X_corr = X_df.corr()
+X_corr = result.corr()
 X_corr_mark = X_corr[X_corr >0.5]
 
 # Generate a mask for the upper triangle

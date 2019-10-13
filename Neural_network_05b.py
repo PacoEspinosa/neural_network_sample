@@ -149,6 +149,3 @@ Xp = np.array([
     ])
 # make class predictions with the model
 predictions = model.predict_classes(Xp)
-# summarize the first 5 cases
-for i in range(5):
-    print('%s => %d (expected %d)' % (Xp[i].tolist(), predictions[i], y[i]))
